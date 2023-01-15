@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // Modulos de Angular Material:
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +33,8 @@ import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { KabanTasksComponent } from './components/kaban-tasks/kaban-tasks.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TaskComponent } from './components/task/task.component';
+import { LifeCycleDirective } from './directives/life-cycle.directive';
+import { MouseOverDirective } from './directives/mouse-over.directive';
 
 
 @NgModule({
@@ -50,7 +54,9 @@ import { TaskComponent } from './components/task/task.component';
     DashboardComponent,
     TasksPageComponent,
     KabanTasksComponent,
-    TaskComponent
+    TaskComponent,
+    LifeCycleDirective,
+    MouseOverDirective
   ],
   imports: [
     BrowserModule,
@@ -68,7 +74,10 @@ import { TaskComponent } from './components/task/task.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    DragDropModule
+    DragDropModule,
+
+    MatExpansionModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "localDeploy:prod": "npm run build && cd dist/ng-routing && serve",
+    "firebase:deploy": "npm run build && firebase deploy",
     "test": "ng test"
   },
   "private": true,
