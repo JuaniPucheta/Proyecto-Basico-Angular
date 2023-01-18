@@ -9,6 +9,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RandomContactPageComponent } from './pages/random-contact-page/random-contact-page.component';
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
+import { OnDemandPreloadStrategy } from './routes/preloading-strategies/on-demand-preloading-strategy';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard],       // no podemos acceder a esta ruta si no estamos logueados
     children: [
       {
         path: '',
@@ -50,6 +51,14 @@ const routes: Routes = [
         component: TasksPageComponent,
         canActivate: [ AuthGuard ]
       },
+      {
+        path: 'fire-store',
+        loadChildren: () => import('./modules/pages/fire-store/fire-store.module').then(m => m.FireStoreModule),
+        canActivate: [AuthGuard],
+        data: {
+          preload: true
+        }
+      },
     ]
   },
   {
@@ -59,7 +68,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    {
+      preloadingStrategy: OnDemandPreloadStrategy
+    }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { PreloadingService } from 'src/app/services/preloading.service';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +20,8 @@ export class NavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private overlayContainer: OverlayContainer
+    private overlayContainer: OverlayContainer,
+    private _preloadingService: PreloadingService
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +49,14 @@ export class NavComponent implements OnInit {
   logout() {
     sessionStorage.removeItem('token');
     this.router.navigate(['login']);
+  }
+
+  /**
+   * Metodo encargado de precargar un modulo del sistema de rutas de la aplicacion
+   * @param ruta ruta para cargar el modulo
+   */
+  precargarModulo(ruta: string) {
+    this._preloadingService.comenzarPrecarga(ruta);
   }
 
 }
